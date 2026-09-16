@@ -18,6 +18,21 @@ static void	tryCreateForm(std::string const & name, int signGrade,
 	}
 }
 
+static void	printInitialState(Bureaucrat const & boss,
+	Bureaucrat const & intern, Form const & important, Form const & easy)
+{
+	std::cout << boss << std::endl;
+	std::cout << intern << std::endl;
+	std::cout << important << std::endl;
+	std::cout << easy << std::endl;
+}
+
+static void	trySignForm(Bureaucrat const & bureaucrat, Form & form)
+{
+	bureaucrat.signForm(form);
+	std::cout << form << std::endl;
+}
+
 int	main()
 {
 	Bureaucrat	boss("Boss", 1);
@@ -25,17 +40,10 @@ int	main()
 	Form		important("Important paper", 50, 25);
 	Form		easy("Easy paper", 150, 150);
 
-	std::cout << boss << std::endl;
-	std::cout << intern << std::endl;
-	std::cout << important << std::endl;
-	std::cout << easy << std::endl;
-
-	intern.signForm(important);
-	std::cout << important << std::endl;
-	boss.signForm(important);
-	std::cout << important << std::endl;
-	intern.signForm(easy);
-	std::cout << easy << std::endl;
+	printInitialState(boss, intern, important, easy);
+	trySignForm(intern, important);
+	trySignForm(boss, important);
+	trySignForm(intern, easy);
 
 	tryCreateForm("Too high sign", 0, 100);
 	tryCreateForm("Too high execute", 100, 0);
