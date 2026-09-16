@@ -1,4 +1,4 @@
-NAME		=	a.out
+NAME		=	Form
 
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
