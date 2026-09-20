@@ -31,28 +31,28 @@ int	ScalarConverter::StrToDouble(const std::string& given_str)
 {
 	(void)given_str;
 	_double = 4.2;
-	return (1);
+	return (SUCCESS);
 }
 
 int	ScalarConverter::StrToFloat(const std::string& given_str)
 {
 	(void)given_str;
 	_float = 4.2f;
-	return (1);
+	return (SUCCESS);
 }
 
 int	ScalarConverter::StrToInt(const std::string& given_str)
 {
 	(void)given_str;
 	_int = 42;
-	return (1);
+	return (SUCCESS);
 }
 
 int	ScalarConverter::StrToChar(const std::string& given_str)
 {
 	(void)given_str;
 	_char = '4';
-	return (1);
+	return (SUCCESS);
 }
 
 void	ScalarConverter::output()
