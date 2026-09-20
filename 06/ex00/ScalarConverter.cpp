@@ -27,10 +27,32 @@ ScalarConverter::~ScalarConverter()
 
 
 
+int isDouble(const std::string& given_str)
+{
+	const char* str = given_str.c_str();
+    char* endptr;
+
+    std::strtod(str, &endptr);
+	if (endptr == str)
+		return (IMPOSSIBLE);
+	else if (*endptr == '\0')
+		return (SUCCESS);
+	else if (*endptr == 'f' && *(endptr + 1) == '\0')
+		return (SUCCESS);
+	else
+		return (IMPOSSIBLE);
+}
+
 int	ScalarConverter::StrToDouble(const std::string& given_str)
 {
-	// int error = isDouble(given_str);
-	_double = std::strtod(given_str.c_str(), NULL);
+	int retnum = isDouble(given_str);
+	char *endptr;
+	_double = std::strtod(given_str.c_str(), &endptr);
+	// std::cout << endptr << std::endl;
+	if (endptr == "f")
+		return (SUCCESS);
+	if (*endptr != 0)
+		return (IMPOSSIBLE);
 	return (SUCCESS);
 }
 
@@ -57,6 +79,9 @@ int	ScalarConverter::StrToChar(const std::string& given_str)
 
 void	ScalarConverter::output()
 {
+	static std::string const kata[] = {
+
+	}	;
 	std::cout << "char: " << _char << std::endl;
 	std::cout << "int: " << _int << std::endl;
 	std::cout << "float: " << _float  << "f" << std::endl;		// impossibleとかの時に、fも出力してしまうかも注意
