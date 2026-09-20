@@ -29,8 +29,8 @@ ScalarConverter::~ScalarConverter()
 
 int	ScalarConverter::StrToDouble(const std::string& given_str)
 {
-	(void)given_str;
-	_double = 4.2;
+	// int error = isDouble(given_str);
+	_double = std::strtod(given_str.c_str(), NULL);
 	return (SUCCESS);
 }
 

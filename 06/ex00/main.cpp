@@ -1,7 +1,9 @@
 #include "ScalarConverter.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-	ScalarConverter::convert("6");
+	if (argc != 2)
+		return (1);
+	ScalarConverter::convert(argv[1]);
 	return (0);
 }

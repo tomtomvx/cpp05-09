@@ -8,9 +8,9 @@ enum repry_number
 	SUCCESS			= 0,
 	IMPOSSIBLE		= 1,
 	NON_DISPLAYABLE	= 2,
-	PLUS_INF		= 3,
-	MINUS_INF		= 4,
-	NOT_A_NUMBER	= 5
+	// PLUS_INF		= 3,
+	// MINUS_INF		= 4,
+	// NOT_A_NUMBER	= 5
 }	;
 
 class ScalarConverter
