@@ -1,17 +1,7 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-# include <iostream>
-
-enum repry_number
-{
-	SUCCESS			= 0,
-	IMPOSSIBLE		= 1,
-	NON_DISPLAYABLE	= 2,
-	PLUS_INF		= 3,	// いらないかも
-	MINUS_INF		= 4,
-	NOT_A_NUMBER	= 5
-}	;
+# include <string>
 
 class ScalarConverter
 {
@@ -27,13 +17,14 @@ class ScalarConverter
 		~ScalarConverter();
 
 		static int	StrToDouble(const std::string& given_str);
-		static int	StrToFloat(const std::string& given_str);
-		static int	StrToInt(const std::string& given_str);
-		static int	StrToChar(const std::string& given_str);
-		static void	output();
+		static int	StrToFloat(bool is_float);
+		static int	StrToInt();
+		static int	StrToChar();
+		static void	output(int char_status, int int_status,
+							int float_status, int double_status);
 
 	public:
 		static void convert(const std::string& given_str);
-}	;
+};
 
 #endif

@@ -1,0 +1,264 @@
+===== INPUT: "a" =====
+char: 'a'
+int: 97
+float: 97.0f
+double: 97.0
+
+===== INPUT: "z" =====
+char: 'z'
+int: 122
+float: 122.0f
+double: 122.0
+
+===== INPUT: "~" =====
+char: '~'
+int: 126
+float: 126.0f
+double: 126.0
+
+===== INPUT: "!" =====
+char: '!'
+int: 33
+float: 33.0f
+double: 33.0
+
+===== INPUT: " " =====
+char: ' '
+int: 32
+float: 32.0f
+double: 32.0
+
+===== INPUT: "0" =====
+char: Non displayable
+int: 0
+float: 0.0f
+double: 0.0
+
+===== INPUT: "5" =====
+char: Non displayable
+int: 5
+float: 5.0f
+double: 5.0
+
+===== INPUT: "9" =====
+char: Non displayable
+int: 9
+float: 9.0f
+double: 9.0
+
+===== INPUT: "42" =====
+char: '*'
+int: 42
+float: 42.0f
+double: 42.0
+
+===== INPUT: "-42" =====
+char: impossible
+int: -42
+float: -42.0f
+double: -42.0
+
+===== INPUT: "127" =====
+char: Non displayable
+int: 127
+float: 127.0f
+double: 127.0
+
+===== INPUT: "2147483647" =====
+char: impossible
+int: 2147483647
+float: 2.14748e+09f
+double: 2.14748e+09
+
+===== INPUT: "-2147483648" =====
+char: impossible
+int: -2147483648
+float: -2.14748e+09f
+double: -2.14748e+09
+
+===== INPUT: "2147483648" =====
+char: impossible
+int: impossible
+float: 2.14748e+09f
+double: 2.14748e+09
+
+===== INPUT: "9999999999999" =====
+char: impossible
+int: impossible
+float: 1e+13f
+double: 1e+13
+
+===== INPUT: "1.0f" =====
+char: Non displayable
+int: 1
+float: 1.0f
+double: 1.0
+
+===== INPUT: "42.5f" =====
+char: '*'
+int: 42
+float: 42.5f
+double: 42.5
+
+===== INPUT: "0.0f" =====
+char: Non displayable
+int: 0
+float: 0.0f
+double: 0.0
+
+===== INPUT: "-0.5f" =====
+char: Non displayable
+int: 0
+float: -0.5f
+double: -0.5
+
+===== INPUT: "123414122.0f" =====
+char: impossible
+int: 123414120
+float: 1.23414e+08f
+double: 1.23414e+08
+
+===== INPUT: "1f" =====
+char: Non displayable
+int: 1
+float: 1.0f
+double: 1.0
+
+===== INPUT: "1.f" =====
+char: Non displayable
+int: 1
+float: 1.0f
+double: 1.0
+
+===== INPUT: ".5f" =====
+char: Non displayable
+int: 0
+float: 0.5f
+double: 0.5
+
+===== INPUT: "1.0ff" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "1.0" =====
+char: Non displayable
+int: 1
+float: 1.0f
+double: 1.0
+
+===== INPUT: "1.09" =====
+char: Non displayable
+int: 1
+float: 1.09f
+double: 1.09
+
+===== INPUT: "42.42" =====
+char: '*'
+int: 42
+float: 42.42f
+double: 42.42
+
+===== INPUT: "-0.25" =====
+char: Non displayable
+int: 0
+float: -0.25f
+double: -0.25
+
+===== INPUT: "nan" =====
+char: impossible
+int: impossible
+float: nanf
+double: nan
+
+===== INPUT: "nanf" =====
+char: impossible
+int: impossible
+float: nanf
+double: nan
+
+===== INPUT: "+inf" =====
+char: impossible
+int: impossible
+float: +inff
+double: +inf
+
+===== INPUT: "+inff" =====
+char: impossible
+int: impossible
+float: +inff
+double: +inf
+
+===== INPUT: "-inf" =====
+char: impossible
+int: impossible
+float: -inff
+double: -inf
+
+===== INPUT: "-inff" =====
+char: impossible
+int: impossible
+float: -inff
+double: -inf
+
+===== INPUT: "inf" =====
+char: impossible
+int: impossible
+float: +inff
+double: +inf
+
+===== INPUT: "inff" =====
+char: impossible
+int: impossible
+float: +inff
+double: +inf
+
+===== INPUT: "abc" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "4a" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "1e309" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "-1e309" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "--1" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "++1" =====
+char: impossible
+int: impossible
+float: impossible
+double: impossible
+
+===== INPUT: "  5" =====
+char: Non displayable
+int: 5
+float: 5.0f
+double: 5.0
+
+===== INPUT: "0x10" =====
+char: Non displayable
+int: 16
+float: 16.0f
+double: 16.0
+
