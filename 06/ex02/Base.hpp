@@ -6,4 +6,6 @@ class Base {
 		virtual ~Base() = 0; // もしかしたら=0はいらないかもしれない
 };
 
+
+
 #endif
