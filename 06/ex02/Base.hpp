@@ -3,9 +3,7 @@
 
 class Base {
 	public:
-		virtual ~Base() = 0; // もしかしたら=0はいらないかもしれない
+		virtual ~Base() = 0;
 };
-
-
 
 #endif
