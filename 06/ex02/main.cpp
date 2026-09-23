@@ -9,7 +9,7 @@
 #include <iostream>
 
 Base *generate() { 
-	int random_num = rand() % 3;
+	int random_num = std::rand() % 3;
 	if (random_num == 0)
 		return new A;
 	else if (random_num == 1)
