@@ -15,4 +15,9 @@ void swap(T &a, T &b){
 	b = tmp;
 }
 
+template <typename T>
+T min(T a, T b){
+	return a < b ? a : b;
+}
+
 #endif
