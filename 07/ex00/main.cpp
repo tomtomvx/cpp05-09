@@ -8,16 +8,16 @@ class Test {
 	public:
 		Test(int number);
 		int getNumber() const;
-		bool operator<(const Test& other);
-		bool operator>(const Test& other);
+		bool operator<(const Test& other) const;
+		bool operator>(const Test& other) const;
 };
 
 Test::Test(int number) : _number(number){}
 int Test::getNumber() const { return _number; }
-bool Test::operator<(const Test& other){
+bool Test::operator<(const Test& other) const {
 	return this->_number < other.getNumber();
 }
-bool Test::operator>(const Test& other){
+bool Test::operator>(const Test& other) const {
 	return this->_number > other.getNumber();
 }
 
@@ -49,6 +49,18 @@ void equal_paramator_test(){
 	std::cout << std::endl;
 }
 
+void const_test(){
+	int a = 1;
+	const int b = 3;
+	std::cout << "===const_test===" << std::endl;
+	std::cout << "a = " << a << ", b = " << b << std::endl;
+	std::cout << "min( 4, 2 ) = " << ::min(4, 2) << std::endl;
+	std::cout << "max( 4, 2 ) = " << ::max(4, 2) << std::endl;
+	std::cout << "min( a, b ) = " << ::min(a, b) << std::endl;
+	std::cout << "max( a, b ) = " << ::max(a, b) << std::endl;
+	std::cout << std::endl;	
+}
+
 int main(void) {
 	int a = 2;
 	int b = 3;
@@ -65,5 +77,6 @@ int main(void) {
 
 	custom_class_compare_test();
 	equal_paramator_test();
+	const_test();
 	return 0;
 }
