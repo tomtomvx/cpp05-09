@@ -31,9 +31,22 @@ void custom_class_compare_test(){
 	Test B(7);
 
 	::swap(A, B);
+	std::cout << "===custom_class_compare_test===" << std::endl;
 	std::cout << "A = " << A << ", B = " << B<< std::endl;	
 	std::cout << "min( a, b ) = " << ::min(A, B) << std::endl;
 	std::cout << "max( a, b ) = " << ::max(A, B) << std::endl;
+	std::cout << std::endl;
+}
+
+void equal_paramator_test(){
+	int a = 42;
+	int b = 42;
+
+	std::cout << "===equal_paramator_test===" << std::endl;
+	std::cout << "a = " << &a << ", b = " << &b << std::endl;	
+	std::cout << "min( a, b ) = " << &::min(a, b) << std::endl;
+	std::cout << "max( a, b ) = " << &::max(a, b) << std::endl;
+	std::cout << std::endl;
 }
 
 int main(void) {
@@ -51,5 +64,6 @@ int main(void) {
 	std::cout << "max( c, d ) = " << ::max(c, d) << std::endl;
 
 	custom_class_compare_test();
+	equal_paramator_test();
 	return 0;
 }
