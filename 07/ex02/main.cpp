@@ -51,6 +51,22 @@ void null_array_test(){
     }
 }
 
+void init_test(){
+    std::cout << "===init test===" << std::endl;
+    bool flg = true;
+    int n = 4;
+    Array<int> array(n);
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i] != 0)
+        {
+            std::cerr << i << ": init failed." << std::endl;
+            flg = false;
+        }
+    }
+    std::cout << (flg ? "OK" : "NG") << std::endl;
+}
+
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -106,5 +122,6 @@ int main(int, char**)
     deep_copy_test();
     const_test();
     null_array_test();
+    init_test();
     return 0;
 }
