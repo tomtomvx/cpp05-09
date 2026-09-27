@@ -2,6 +2,24 @@
 #include "Array.hpp"
 
 #define MAX_VAL 750
+
+void deep_copy_test()
+{
+    std::cout << "===deep_copy_test===" << std::endl;
+    unsigned int n = 5;
+    Array<int> numbers(n);
+    for (unsigned int i = 0; i < n; i++)
+    {
+        numbers[i] = i;
+    }
+    Array<int> except(numbers);
+    numbers[2] =  42;
+    if (except[2] == 42)
+        std::cerr << "The values in another array have been updated!!" << std::endl;
+    else
+        std::cout << "OK" << std::endl;
+}
+
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -52,6 +70,7 @@ int main(int, char**)
 
 	// int *a = new int();
 	// std::cout << *a << std::endl;
+    deep_copy_test();
 
     return 0;
 }
