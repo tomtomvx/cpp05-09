@@ -7,7 +7,7 @@ Array<T>::Array() : _data(NULL), _size(0)
 }
 
 template<typename T>
-Array<T>::Array(unsigned int n) : _data(n ? new[n](); NULL), _size(n)
+Array<T>::Array(unsigned int n) : _data(n ? new T[n](): NULL), _size(n)
 {
 	// if (n)
 	// 	_data = new T[n]();
@@ -38,7 +38,7 @@ Array<T>::Array(const Array& other) : _data(NULL), _size(0)
 		delete[] _data;
 		throw ;
 	}
-	_size(other._size);
+	_size = other._size;
 }
 
 // template<typename T>
