@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <iostream>
 #include "Array.hpp"
 
@@ -37,6 +38,17 @@ void const_test(){
     }
     //const_array_copy[0] = 42;     // compile error
     //const_array_equal[0] = 42;    // compile error 
+}
+
+void null_array_test(){
+    std::cout << "===null array test===" << std::endl;
+    Array<int> array(0);
+    try {
+        array[0];
+        std::cerr << "NG" << std::endl;
+    } catch(...) {
+        std::cout << "OK" << std::endl;
+    }
 }
 
 int main(int, char**)
@@ -93,5 +105,6 @@ int main(int, char**)
 	// std::cout << *a << std::endl;
     deep_copy_test();
     const_test();
+    null_array_test();
     return 0;
 }
