@@ -20,6 +20,25 @@ void deep_copy_test()
         std::cout << "OK" << std::endl;
 }
 
+void const_test(){
+    std::cout << "===const test===" << std::endl;
+    unsigned int n = 3;
+    Array<int> array(n);
+    for (unsigned int i = 0; i < n; i++)
+    {
+        array[i] = i;
+    }
+    const Array<int> const_array_copy(array);
+    const Array<int> const_array_equal = array;
+    for (unsigned int i = 0; i < n; i++)
+    {
+        std::cout << "const_array_copy[" << i << "] = "  << const_array_copy[i] << std::endl;
+        std::cout << "const_array_equal[" << i << "] = "  << const_array_equal[i] << std::endl;
+    }
+    //const_array_copy[0] = 42;     // compile error
+    //const_array_equal[0] = 42;    // compile error 
+}
+
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -48,18 +67,20 @@ int main(int, char**)
     try
     {
         numbers[-2] = 0;
+        std::cerr << "Array index out of range:NG" << '\n';
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << ":OK" << '\n';
     }
     try
     {
         numbers[MAX_VAL] = 0;
+        std::cerr << "Array index out of range:NG" << '\n';
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << ":OK" << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)
@@ -71,6 +92,6 @@ int main(int, char**)
 	// int *a = new int();
 	// std::cout << *a << std::endl;
     deep_copy_test();
-
+    const_test();
     return 0;
 }
