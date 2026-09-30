@@ -1,4 +1,4 @@
-NAME		=	Array
+NAME		=	Easy_find
 
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
