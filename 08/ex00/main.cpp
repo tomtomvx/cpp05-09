@@ -9,7 +9,7 @@ bool check(const T& container, int value, typename T::const_iterator expected, c
 {
     typename T::const_iterator found = easyfind(container, value);
     std::cout << (found == expected ? "[OK] " : "[NG] ") << label << std::endl;
-    return (passed);
+    return (found == expected);
 }
 
 int main()
