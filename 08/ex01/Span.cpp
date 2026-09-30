@@ -1,5 +1,7 @@
 #include "Span.hpp"
 
+#include <algorithm>
+#include <stdexcept>
 
 Span::Span() : _v(), _size_max(0)
 {
@@ -43,15 +45,19 @@ unsigned int Span::shortestSpan()
 	std::vector<int> sorted(_v);
 	std::sort(sorted.begin(), sorted.end());
 
-	int shortest = sorted[1] - sorted[0];
+	unsigned int shortest = static_cast<unsigned int>(sorted[1])
+							- static_cast<unsigned int>(sorted[0]);
+
 	for (std::vector<int>::size_type i = 2; i < sorted.size(); i++)
 	{
-		int distance = sorted[i] - sorted[i - 1];
+		unsigned int distance = static_cast<unsigned int>(sorted[i])
+								- static_cast<unsigned int>(sorted[i - 1]);
+
 		if (distance < shortest)
 			shortest = distance;
 	}
 
-	return (static_cast<unsigned int>(shortest));
+	return (shortest);
 }
 
 unsigned int Span::longestSpan()
@@ -62,7 +68,8 @@ unsigned int Span::longestSpan()
 	std::vector<int> sorted(_v);
 	std::sort(sorted.begin(), sorted.end());
 
-	unsigned int longest = sorted[sorted.back()] - sorted[0];
+	unsigned int longest = static_cast<unsigned int>(sorted.back())
+						   - static_cast<unsigned int>(sorted.front());
 
 	return (longest);
 }
