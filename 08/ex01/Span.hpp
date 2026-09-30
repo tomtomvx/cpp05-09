@@ -10,21 +10,32 @@ class Span {
 		unsigned int _size_max;
 
 	public:
-		class SizeOver : public std::exception
-		{
-		public:
-			virtual char const *	what() const throw();
-		};
-
 		Span();
 		Span(unsigned int n);
-		Span(Span& other);
-		Span& operator=(Span& other);
+		Span(const Span& other);
+		Span& operator=(const Span& other);
 		~Span();
 
 		void addNumber(int n);
-		int shortestSpan();
-		int longestSpan();
-};
+		unsigned int shortestSpan();
+		unsigned int longestSpan();
+
+		template <typename InputIterator>
+		void addNumber(InputIterator first, InputIterator last)
+		{
+			std::vector<int> numbers(first, last);
+
+			if (numbers.size() > _size_max - _v.size())
+				throw SizeOver();
+
+			_v.insert(_v.end(), numbers.begin(), numbers.end());
+		}
+
+		class SizeOver : public std::exception
+		{
+			public:
+				virtual char const *	what() const throw();
+		};
+}	;
 
 #endif
