@@ -2,8 +2,8 @@
 
 #include <cassert>
 #include <climits>
+#include <cstring>
 #include <iostream>
-#include <stdexcept>
 #include <vector>
 
 static void testBasic()
@@ -29,16 +29,18 @@ static void expectTooFewNumbers(Span& span)
 	{
 		span.shortestSpan();
 	}
-	catch (const std::runtime_error&)
+	catch (const Span::SpanException& e)
 	{
+		assert(std::strcmp(e.what(), "Span needs at least two numbers") == 0);
 		shortestThrew = true;
 	}
 	try
 	{
 		span.longestSpan();
 	}
-	catch (const std::runtime_error&)
+	catch (const Span::SpanException& e)
 	{
+		assert(std::strcmp(e.what(), "Span needs at least two numbers") == 0);
 		longestThrew = true;
 	}
 	assert(shortestThrew && longestThrew);
@@ -66,8 +68,9 @@ static void testCapacity()
 	{
 		zero.addNumber(1);
 	}
-	catch (const Span::SizeOver&)
+	catch (const Span::SpanException& e)
 	{
+		assert(std::strcmp(e.what(), "Span capacity exceeded") == 0);
 		zeroThrew = true;
 	}
 	full.addNumber(4);
@@ -76,8 +79,9 @@ static void testCapacity()
 	{
 		full.addNumber(6);
 	}
-	catch (const Span::SizeOver&)
+	catch (const Span::SpanException& e)
 	{
+		assert(std::strcmp(e.what(), "Span capacity exceeded") == 0);
 		fullThrew = true;
 	}
 	assert(zeroThrew && fullThrew);
@@ -119,8 +123,9 @@ static void testRange()
 	{
 		overflow.addNumber(tooMany, tooMany + 3);
 	}
-	catch (const Span::SizeOver&)
+	catch (const Span::SpanException& e)
 	{
+		assert(std::strcmp(e.what(), "Span capacity exceeded") == 0);
 		rangeThrew = true;
 	}
 	assert(rangeThrew);

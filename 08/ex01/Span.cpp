@@ -1,7 +1,6 @@
 #include "Span.hpp"
 
 #include <algorithm>
-#include <stdexcept>
 
 Span::Span() : _v(), _size_max(0)
 {
@@ -33,14 +32,14 @@ Span::~Span()
 void Span::addNumber(int n)
 {
 	if (_v.size() >= _size_max)
-		throw SizeOver();
+		throw SpanException("Span capacity exceeded");
 	_v.push_back(n);
 }
 
 unsigned int Span::shortestSpan()
 {
 	if (_v.size() < 2)
-		throw std::runtime_error("Span needs at least two numbers");
+		throw SpanException("Span needs at least two numbers");
 
 	std::vector<int> sorted(_v);
 	std::sort(sorted.begin(), sorted.end());
@@ -63,7 +62,7 @@ unsigned int Span::shortestSpan()
 unsigned int Span::longestSpan()
 {
 	if (_v.size() < 2)
-		throw std::runtime_error("Span needs at least two numbers");
+		throw SpanException("Span needs at least two numbers");
 
 	std::vector<int> sorted(_v);
 	std::sort(sorted.begin(), sorted.end());
@@ -74,7 +73,12 @@ unsigned int Span::longestSpan()
 	return (longest);
 }
 
-char const *Span::SizeOver::what() const throw()
+Span::SpanException::SpanException(const char *message) throw()
+	: _message(message)
 {
-    return ("Span capacity exceeded");
+}
+
+char const *Span::SpanException::what() const throw()
+{
+	return (_message);
 }

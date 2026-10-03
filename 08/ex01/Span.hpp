@@ -26,14 +26,18 @@ class Span {
 			std::vector<int> numbers(first, last);
 
 			if (numbers.size() > _size_max - _v.size())
-				throw SizeOver();
+				throw SpanException("Span capacity exceeded");
 
 			_v.insert(_v.end(), numbers.begin(), numbers.end());
 		}
 
-		class SizeOver : public std::exception
+		class SpanException : public std::exception
 		{
+			private:
+				const char *_message;
+
 			public:
+				explicit SpanException(const char *message) throw();
 				virtual char const *	what() const throw();
 		};
 }	;
