@@ -9,8 +9,8 @@ class MutantStack : public std::stack<T>
 	private:
 
 	public:
-		typedef typename std::stack<T>container_type::iterator iterator;
-		typedef typename std::stack<T>container_type::const_iterator const_iterator;
+		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
 		MutantStack();
 		MutantStack(const MutantStack& other);
@@ -19,8 +19,8 @@ class MutantStack : public std::stack<T>
 
 		iterator begin();
 		iterator end();
-		const iterator begin() const;
-		const iterator end() const;
+		const_iterator begin() const;
+		const_iterator end() const;
 }	;
 
 #include "MutantStack.tpp"
