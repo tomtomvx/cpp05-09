@@ -1,4 +1,6 @@
 #include <cstddef>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include "Array.hpp"
 
@@ -71,10 +73,10 @@ int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
+    std::srand(std::time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
     {
-        const int value = rand();
+        const int value = std::rand();
         numbers[i] = value;
         mirror[i] = value;
     }
@@ -113,7 +115,7 @@ int main(int, char**)
 
     for (int i = 0; i < MAX_VAL; i++)
     {
-        numbers[i] = rand();
+        numbers[i] = std::rand();
     }
     delete [] mirror;//
 
