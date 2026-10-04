@@ -34,6 +34,7 @@ static void fillValues(MutantStack<int>& stack, std::list<int>& list)
 	}
 }
 
+/*   push, top, pop, sizeが通常のスタックとして動くか確認   */
 static int testStackOperations()
 {
 	MutantStack<int> stack;
@@ -48,6 +49,7 @@ static int testStackOperations()
 	return (failures);
 }
 
+/*   begin()からend()までたどり、std::listと同じ順序で値を読めるか確認。表示される順序は、積んだ順の5, 3, 5, 737, 0   */
 static int testIteration()
 {
 	MutantStack<int> stack;
@@ -65,6 +67,7 @@ static int testIteration()
 	return (!check(sameValues(stack, list), "same iteration order as list"));
 }
 
+/*   コピーコンストラクタで値がコピーされ、constなコピーでも走査できるか確認   */
 static int testCopy()
 {
 	MutantStack<int> stack;
@@ -74,6 +77,7 @@ static int testCopy()
 	return (!check(sameValues(copied, list), "copy and const iteration"));
 }
 
+/*   代入で既存の値が置き換わるか、自己代入assigned = *selfでも値が保たれるか確認   */
 static int testAssignment()
 {
 	MutantStack<int> stack;
@@ -91,6 +95,7 @@ static int testAssignment()
 	return (failures);
 }
 
+/*   空のスタックではbegin() == end()になるか確認   */
 static int testEmpty()
 {
 	MutantStack<int> empty;
