@@ -124,7 +124,7 @@ void BitcoinExchange::processLine(const std::string& line) const
 		std::cerr << "Error: bad input => " << line << std::endl;
 		return;
 	}
-	if (value < 0)
+	if (valueText[0] == '-' || value < 0)
 	{
 		std::cerr << "Error: not a positive number." << std::endl;
 		return;
