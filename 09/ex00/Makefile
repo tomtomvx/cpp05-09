@@ -27,10 +27,4 @@ fclean: clean
 
 re: fclean all
 
-run: re
-	./$(NAME)
-	$(MAKE) fclean
-
-test: run
-
-.PHONY: all clean fclean re run test
+.PHONY: all clean fclean re
