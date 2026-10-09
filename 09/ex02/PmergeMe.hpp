@@ -12,7 +12,7 @@ class PmergeMe {
 		std::vector<int>	_vec;
 		std::list<int>		_lst;
 
-		void				_parseInput(int argc, char** argv);
+		std::vector<int>	_parseInput(int argc, char** argv);
 		std::vector<int>	_getInsertionOrder(size_t n);
 		std::vector<int>	_sortVector(std::vector<int> input);
 		std::list<int>		_sortList(std::list<int> input);

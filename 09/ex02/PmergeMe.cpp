@@ -1,10 +1,12 @@
 #include "PmergeMe.hpp"
 
 #include <iostream>
+#include <cstdlib>
+#include <climits>
+#include <utility>
 #include <cerrno>
-
+#include <ctime>
 #include <algorithm>
-
 #include <vector>
 #include <list>
 
@@ -62,12 +64,19 @@ std::vector<int> PmergeMe::_getInsertionOrder(size_t n) {
 	return order;
 }
 
-void PmergeMe::_parseInput(int argc, char** argv) {
+std::vector<int> PmergeMe::_parseInput(int argc, char** argv) {
 	if (argc < 2)
 		throw PmergeMeError("_perceInput::Insufficient arguments");
 
+	std::vector<int> values;
 	for (int i = 1; i < argc; ++i) {
 		std::string token = argv[i];
+		if (token.empty())
+			throw PmergeMeError("_perceInput::Not a number");
+		for (size_t j = 0; j < token.size(); ++j) {
+			if (token[j] < '0' || token[j] > '9')
+				throw PmergeMeError("_perceInput::Contains invalid characters");
+		}
 		char* endptr;
 		errno = 0;
 		long value = std::strtol(token.c_str(), &endptr, 10);
@@ -82,9 +91,9 @@ void PmergeMe::_parseInput(int argc, char** argv) {
 			throw PmergeMeError("_perceInput::Not a natural number");
 		if (value > INT_MAX)
 			throw PmergeMeError("_perceInput::Exceeded the maximum value for int");
-		_vec.push_back(static_cast<int>(value));
-		_lst.push_back(static_cast<int>(value));
+		values.push_back(static_cast<int>(value));
 	}
+	return values;
 }
 
 std::vector<int> PmergeMe::_sortVector(std::vector<int> input) {
@@ -211,13 +220,15 @@ PmergeMe::~PmergeMe() {}
 
 
 void PmergeMe::run(int argc, char** argv) {
-	_parseInput(argc, argv);
+	std::vector<int> values = _parseInput(argc, argv);
 
 	clock_t stVec = std::clock();
+	_vec.assign(values.begin(), values.end());
 	std::vector<int> sortedVec = _sortVector(_vec);
 	clock_t edVec = std::clock();
 
 	clock_t stLst = std::clock();
+	_lst.assign(values.begin(), values.end());
 	std::list<int> sortedLst = _sortList(_lst);
 	clock_t edLst = std::clock();
 
