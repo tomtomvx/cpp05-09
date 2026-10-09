@@ -107,20 +107,33 @@ std::vector<int> PmergeMe::_sortVector(std::vector<int> input) {
 	for (size_t i = 0; i < pairs.size(); ++i)
 		bigs.push_back(pairs[i].first);
 	std::vector<int> sortedChain = _sortVector(bigs);
-	std::vector<int> order = _getInsertionOrder(pairs.size());
-	for (size_t i = 0; i < order.size(); ++i) {
-		int smallVal = pairs[order[i]].second;
-		int pairedBig = pairs[order[i]].first;
-		std::vector<int>::iterator bigPos =
-			std::find(sortedChain.begin(), sortedChain.end(), pairedBig);
+	std::vector<std::pair<int, int> > sortedPairs;
+	std::vector<bool> used(pairs.size(), false);
+	for (size_t i = 0; i < sortedChain.size(); ++i) {
+		size_t j = 0;
+		while (j < pairs.size() &&
+			(used[j] || pairs[j].first != sortedChain[i]))
+			++j;
+		if (j == pairs.size())
+			throw PmergeMeError("_sortVector::Pair not found");
+		sortedPairs.push_back(pairs[j]);
+		used[j] = true;
+	}
+	sortedChain.insert(sortedChain.begin(), sortedPairs[0].second);
+	std::vector<int> order = _getInsertionOrder(
+		sortedPairs.size() + (hasStraggler ? 1 : 0));
+	for (size_t i = 1; i < order.size(); ++i) {
+		size_t index = static_cast<size_t>(order[i]);
+		int smallVal = straggler;
+		std::vector<int>::iterator bigPos = sortedChain.end();
+		if (index < sortedPairs.size()) {
+			smallVal = sortedPairs[index].second;
+			bigPos = std::find(sortedChain.begin(), sortedChain.end(),
+					sortedPairs[index].first);
+		}
 		std::vector<int>::iterator insertPos =
 			std::lower_bound(sortedChain.begin(), bigPos, smallVal);
 		sortedChain.insert(insertPos, smallVal);
-	}
-	if (hasStraggler) {
-		std::vector<int>::iterator insertPos =
-			std::lower_bound(sortedChain.begin(), sortedChain.end(), straggler);
-		sortedChain.insert(insertPos, straggler);
 	}
 	return sortedChain;
 }
@@ -153,25 +166,33 @@ std::list<int> PmergeMe::_sortList(std::list<int> input) {
 	for (size_t i = 0; i < pairs.size(); ++i)
 		bigs.push_back(pairs[i].first);
 	std::list<int> sortedChain = _sortList(bigs);
-	std::vector<int> order = _getInsertionOrder(pairs.size());
-	for (size_t i = 0; i < order.size(); ++i) {
-		int smallVal = pairs[order[i]].second;
-		int pairedBig = pairs[order[i]].first;
-		std::list<int>::iterator bigPos =
-			std::find(sortedChain.begin(), sortedChain.end(), pairedBig);
-
-		// std::list<int>::iterator insertPos = sortedChain.begin();
-		// while (insertPos != bigPos && *insertPos < smallVal)
-		// 	++insertPos;
-		std::list<int>::iterator insertPos =
-		std::lower_bound(sortedChain.begin(), bigPos, smallVal);
-		sortedChain.insert(insertPos, smallVal);
+	std::vector<std::pair<int, int> > sortedPairs;
+	std::vector<bool> used(pairs.size(), false);
+	for (std::list<int>::const_iterator it = sortedChain.begin();
+		it != sortedChain.end(); ++it) {
+		size_t j = 0;
+		while (j < pairs.size() && (used[j] || pairs[j].first != *it))
+			++j;
+		if (j == pairs.size())
+			throw PmergeMeError("_sortList::Pair not found");
+		sortedPairs.push_back(pairs[j]);
+		used[j] = true;
 	}
-	if (hasStraggler) {
-		std::list<int>::iterator insertPos = sortedChain.begin();
-		while (insertPos != sortedChain.end() && *insertPos < straggler)
-			++insertPos;
-		sortedChain.insert(insertPos, straggler);
+	sortedChain.insert(sortedChain.begin(), sortedPairs[0].second);
+	std::vector<int> order = _getInsertionOrder(
+		sortedPairs.size() + (hasStraggler ? 1 : 0));
+	for (size_t i = 1; i < order.size(); ++i) {
+		size_t index = static_cast<size_t>(order[i]);
+		int smallVal = straggler;
+		std::list<int>::iterator bigPos = sortedChain.end();
+		if (index < sortedPairs.size()) {
+			smallVal = sortedPairs[index].second;
+			bigPos = std::find(sortedChain.begin(), sortedChain.end(),
+					sortedPairs[index].first);
+		}
+		std::list<int>::iterator insertPos =
+			std::lower_bound(sortedChain.begin(), bigPos, smallVal);
+		sortedChain.insert(insertPos, smallVal);
 	}
 	return sortedChain;
 }
@@ -197,7 +218,7 @@ void PmergeMe::run(int argc, char** argv) {
 	clock_t edVec = std::clock();
 
 	clock_t stLst = std::clock();
-	std::vector<int> sortedLst = _sortList(_lst);
+	std::list<int> sortedLst = _sortList(_lst);
 	clock_t edLst = std::clock();
 
 	if (sortedVec.size() != sortedLst.size() ||

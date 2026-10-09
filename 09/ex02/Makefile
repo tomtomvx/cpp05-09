@@ -27,13 +27,7 @@ fclean: clean
 
 re: fclean all
 
-run: re
-	./$(NAME)
-	$(MAKE) fclean
-
-test: run
-
 debug: CXXFLAGS += -DDEBUG
 debug: re
 
-.PHONY: all clean fclean re run test debug
+.PHONY: all clean fclean re run debug
