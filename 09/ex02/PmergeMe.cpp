@@ -9,7 +9,6 @@
 #include <list>
 
 
-
 PmergeMe::PmergeMeError::PmergeMeError() : _detail("Error") {}
 
 PmergeMe::PmergeMeError::PmergeMeError(const std::string& detail)
@@ -35,6 +34,7 @@ const char* PmergeMe::PmergeMeError::what() const throw() {
     return "Error";
 #endif
 }
+
 
 std::vector<int> PmergeMe::_getInsertionOrder(size_t n) {
 	int nInt = static_cast<int>(n);
@@ -157,12 +157,24 @@ std::list<int> PmergeMe::_sortList(std::list<int> input) {
 	for (size_t i = 0; i < order.size(); ++i) {
 		int smallVal = pairs[order[i]].second;
 		int pairedBig = pairs[order[i]].first;
-		
+		std::list<int>::iterator bigPos =
+			std::find(sortedChain.begin(), sortedChain.end(), pairedBig);
+
+		// std::list<int>::iterator insertPos = sortedChain.begin();
+		// while (insertPos != bigPos && *insertPos < smallVal)
+		// 	++insertPos;
+		std::list<int>::iterator insertPos =
+		std::lower_bound(sortedChain.begin(), bigPos, smallVal);
+		sortedChain.insert(insertPos, smallVal);
 	}
-
-	return ;
+	if (hasStraggler) {
+		std::list<int>::iterator insertPos = sortedChain.begin();
+		while (insertPos != sortedChain.end() && *insertPos < straggler)
+			++insertPos;
+		sortedChain.insert(insertPos, straggler);
+	}
+	return sortedChain;
 }
-
 
 
 PmergeMe::PmergeMe() {}
@@ -175,6 +187,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 	return *this;
 }
 PmergeMe::~PmergeMe() {}
+
 
 void PmergeMe::run(int argc, char** argv) {
 	_parseInput(argc, argv);
