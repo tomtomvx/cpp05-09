@@ -113,7 +113,7 @@ void BitcoinExchange::processLine(const std::string& line) const
 	const std::string::size_type bar = line.find('|');
 	if (bar == std::string::npos || line.find('|', bar + 1) != std::string::npos)
 	{
-		std::cerr << "Error: bad input => " << line << std::endl;
+		std::cout << "Error: bad input => " << line << std::endl;
 		return;
 	}
 	const std::string date = trim(line.substr(0, bar));
@@ -121,23 +121,23 @@ void BitcoinExchange::processLine(const std::string& line) const
 	double value = 0;
 	if (!validDate(date) || !parseNumber(valueText, value))
 	{
-		std::cerr << "Error: bad input => " << line << std::endl;
+		std::cout << "Error: bad input => " << line << std::endl;
 		return;
 	}
 	if (valueText[0] == '-' || value < 0)
 	{
-		std::cerr << "Error: not a positive number." << std::endl;
+		std::cout << "Error: not a positive number." << std::endl;
 		return;
 	}
 	if (value > 1000)
 	{
-		std::cerr << "Error: too large a number." << std::endl;
+		std::cout << "Error: too large a number." << std::endl;
 		return;
 	}
 	std::map<std::string, double>::const_iterator rate = _rates.upper_bound(date);
 	if (rate == _rates.begin())
 	{
-		std::cerr << "Error: bad input => " << line << std::endl;
+		std::cout << "Error: bad input => " << line << std::endl;
 		return;
 	}
 	--rate;
